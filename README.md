@@ -8,6 +8,9 @@ using them as a black box.
 
 ---
 
+<img width="1050" height="746" alt="image" src="https://github.com/user-attachments/assets/172bf95e-a9ab-4a49-84ab-924861960f07" />
+
+
 ## Why this exists
 
 Every LLM-powered application eventually hits the same wall: you tweak a prompt,
