@@ -1,0 +1,18 @@
+# Environment / secrets
+.env
+
+# Python
+__pycache__/
+*.pyc
+venv/
+*.egg-info/
+.pytest_cache/
+
+# Generated / local data
+eval_history.sqlite3
+reports/*.json
+chroma_db/
+
+# OS junk
+.DS_Store
+Thumbs.db

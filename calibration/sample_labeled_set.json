@@ -1,0 +1,32 @@
+[
+  {
+    "input": "What is the capital of France?",
+    "actual_output": "Paris is the capital of France.",
+    "human_score": 1.0
+  },
+  {
+    "input": "What is the capital of France?",
+    "actual_output": "France is a country in Western Europe with a rich history.",
+    "human_score": 0.15
+  },
+  {
+    "input": "Explain photosynthesis briefly.",
+    "actual_output": "Photosynthesis is the process by which plants convert sunlight into chemical energy using chlorophyll, producing oxygen as a byproduct.",
+    "human_score": 0.95
+  },
+  {
+    "input": "Explain photosynthesis briefly.",
+    "actual_output": "Plants are green and grow outside.",
+    "human_score": 0.1
+  },
+  {
+    "input": "What year did World War II end?",
+    "actual_output": "World War II ended in 1945.",
+    "human_score": 1.0
+  },
+  {
+    "input": "What year did World War II end?",
+    "actual_output": "It was a devastating global conflict with many casualties.",
+    "human_score": 0.05
+  }
+]

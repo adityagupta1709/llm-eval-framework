@@ -1,0 +1,7 @@
+[
+  {"name": "capital_of_france", "input": "What is the capital of France?", "expected_output": "Paris"},
+  {"name": "water_boiling_point", "input": "At what temperature does water boil at sea level in Celsius?", "expected_output": "100 degrees Celsius"},
+  {"name": "largest_planet", "input": "What is the largest planet in our solar system?", "expected_output": "Jupiter"},
+  {"name": "python_creator", "input": "Who created the Python programming language?", "expected_output": "Guido van Rossum"},
+  {"name": "speed_of_light", "input": "What is the approximate speed of light in a vacuum, in kilometers per second?", "expected_output": "About 300,000 kilometers per second"}
+]

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LLM Eval Framework</title>
+<link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="console">
+
+    <header class="console-header">
+      <div class="eyebrow">Evaluation console</div>
+      <h1>LLM Eval Framework</h1>
+      <p class="subtitle">Score outputs, track drift across runs, and check whether the judge actually agrees with a human — at zero cost.</p>
+    </header>
+
+    <nav class="tabs" role="tablist">
+      <button class="tab-btn active" data-tab="run" role="tab" aria-selected="true">Run</button>
+      <button class="tab-btn" data-tab="history" role="tab" aria-selected="false">History</button>
+      <button class="tab-btn" data-tab="pairwise" role="tab" aria-selected="false">Pairwise</button>
+      <button class="tab-btn" data-tab="calibration" role="tab" aria-selected="false">Calibration</button>
+    </nav>
+
+    <!-- RUN TAB -->
+    <section id="tab-run" class="tab-panel active" role="tabpanel">
+
+      <details class="glossary">
+        <summary>What do these metrics measure? <span class="glossary-toggle">Show / hide</span></summary>
+        <div class="glossary-body">
+          <div class="glossary-row"><span class="dot dot-pass"></span><b>exact_match</b><span class="glossary-desc">Does the output exactly equal <code>expected_output</code>? Strict — only useful when there's one correct string.</span></div>
+          <div class="glossary-row"><span class="dot dot-pass"></span><b>semantic_similarity</b><span class="glossary-desc">Embeds both outputs and scores how close they are in <i>meaning</i>, not exact wording. A terse ground truth vs. a verbose answer can still score lower than expected.</span></div>
+          <div class="glossary-row"><span class="dot dot-pass"></span><b>answer_relevancy</b><span class="glossary-desc">LLM-judged: does the output actually address the question, regardless of wording?</span></div>
+          <div class="glossary-row"><span class="dot dot-pass"></span><b>faithfulness</b><span class="glossary-desc">RAG-specific. Does the output stay grounded in <code>retrieval_context</code>, or does it add unsupported claims?</span></div>
+          <div class="glossary-row"><span class="dot dot-na"></span><b>N/A</b><span class="glossary-desc">The metric didn't have what it needed for this case (e.g. no <code>expected_output</code>) — shown gray, and never counts against the case's pass/fail.</span></div>
+        </div>
+      </details>
+
+      <label for="datasetInput">Test cases (JSON array)</label>
+      <textarea id="datasetInput" rows="9" placeholder='[{"name": "...", "input": "...", "actual_output": "...", "expected_output": "..."}]'></textarea>
+      <button id="loadDemoBtn" class="btn-secondary">Load demo dataset</button>
+
+      <label>Metrics</label>
+      <div id="metricCheckboxes" class="checkbox-row"></div>
+
+      <div class="field-pair">
+        <div>
+          <label for="runLabel">Run label</label>
+          <input id="runLabel" type="text" value="run-1">
+        </div>
+        <button id="runBtn" class="btn-primary">Run evaluation</button>
+      </div>
+
+      <div id="regressionBanner" class="hidden"></div>
+      <div id="summaryPanel"></div>
+      <div id="runResults"></div>
+    </section>
+
+    <!-- HISTORY TAB -->
+    <section id="tab-history" class="tab-panel" role="tabpanel">
+      <label for="historyMetricSelect">Metric</label>
+      <div class="field-pair">
+        <select id="historyMetricSelect"></select>
+        <button id="loadHistoryBtn" class="btn-primary">Load history</button>
+      </div>
+      <div id="historyChart"></div>
+      <div id="historyTable"></div>
+    </section>
+
+    <!-- PAIRWISE TAB -->
+    <section id="tab-pairwise" class="tab-panel" role="tabpanel">
+      <p class="panel-intro">Compare two candidate outputs for the same input head-to-head — for "is prompt v2 actually better than v1" questions a single score can't answer.</p>
+      <label for="pairwiseInput">Input / question</label>
+      <textarea id="pairwiseInput" rows="2"></textarea>
+      <label for="pairwiseA">Response A</label>
+      <textarea id="pairwiseA" rows="3"></textarea>
+      <label for="pairwiseB">Response B</label>
+      <textarea id="pairwiseB" rows="3"></textarea>
+      <button id="pairwiseBtn" class="btn-primary">Compare</button>
+      <div id="pairwiseResult"></div>
+    </section>
+
+    <!-- CALIBRATION TAB -->
+    <section id="tab-calibration" class="tab-panel" role="tabpanel">
+      <p class="panel-intro">Runs the judge against a small hand-labeled sample and checks how often it agrees with the human-assigned score. LLM judges typically agree with human raters 85-92% of the time — not 100% — so this is the guardrail against trusting the judge blindly.</p>
+      <button id="calibrateBtn" class="btn-primary">Run calibration</button>
+      <div id="calibrationResult"></div>
+    </section>
+
+  </div>
+  <script src="/static/app.js"></script>
+</body>
+</html>
